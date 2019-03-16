@@ -1,0 +1,1 @@
+# lingozone-cards-database
