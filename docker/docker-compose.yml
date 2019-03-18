@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+  database:
+    image: postgres
+    volumes:
+      - ./docker-entrypoint-initdb.d/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+    environment:
+      POSTGRES_USER: cards
+      POSTGRES_PASSWORD: cards
+      POSTGRES_DB: cards
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+
+  init-database:
+    image: openjdk:11-jre-slim
+    volumes:
+      - ${PWD}:${PWD}
+    working_dir: ${PWD}
+    links:
+      - database
+    command: ./gradlew update

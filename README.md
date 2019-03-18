@@ -1,1 +1,1 @@
-# lingozone-cards-database
+# Cards database

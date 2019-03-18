@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="siarhei.blashuk" id="cards-0001-001">
+        <createTable tableName="expression">
+            <column name="expression_id" autoIncrement="true" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="expression_pkey"/>
+            </column>
+            <column name="expression" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date" defaultValueComputed="now()" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="siarhei.blashuk" id="cards-0001-002">
+        <createTable tableName="definition">
+            <column name="definition_id" autoIncrement="true" type="SERIAL">
+                <constraints primaryKey="true" primaryKeyName="definition_pkey"/>
+            </column>
+            <column name="definition" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date" defaultValueComputed="now()" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fk_expression" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="siarhei.blashuk" id="cards-0001-003">
+        <addForeignKeyConstraint baseColumnNames="fk_expression" baseTableName="definition"
+                                 constraintName="definition_fk_expression_fkey" deferrable="false"
+                                 initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"
+                                 referencedColumnNames="expression_id" referencedTableName="expression"/>
+    </changeSet>
+</databaseChangeLog>
