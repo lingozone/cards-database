@@ -3,8 +3,6 @@ version: "2"
 services:
   database:
     image: postgres
-    volumes:
-      - ./docker-entrypoint-initdb.d/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
     environment:
       POSTGRES_USER: cards
       POSTGRES_PASSWORD: cards
